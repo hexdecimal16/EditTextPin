@@ -27,9 +27,10 @@ allprojects {
 
 ```gradle
 dependencies {
-        implementation 'com.github.hexdecimal16:EditTextPin:0.1.0'
+        implementation 'com.github.hexdecimal16:EditTextPin:Version'
 }
 ```
+Version:[![Release](https://jitpack.io/v/hexdecimal16/EditTextPin.svg?style=flat-square)]()
 ## Implement
 
 ```XML
