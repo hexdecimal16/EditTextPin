@@ -1,24 +1,38 @@
 package com.dhairytripathi.library;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 
 public class EditTextPin extends ConstraintLayout {
     private EditText pin1, pin2, pin3, pin4, pin5, pin6;
     private Context context;
+    private int underlineColor = R.color.underlineColor;
+    private LinearLayout layout;
+    private ConstraintLayout viewBackground;
     public EditTextPin(Context context, AttributeSet attrs) {
         super(context, attrs);
+        handleAttrs(attrs);
         this.context = context;
     }
 
     public EditTextPin(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        handleAttrs(attrs);
         this.context = context;
     }
 
@@ -26,6 +40,12 @@ public class EditTextPin extends ConstraintLayout {
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         LayoutInflater.from(context).inflate(R.layout.edit_pin, this, true);
+        ConstraintLayout view = findViewById(R.id.viewBackground);
+        LayerDrawable shape = (LayerDrawable) ContextCompat.getDrawable(context,R.drawable.underline);
+        GradientDrawable bgShape = (GradientDrawable) (shape.findDrawableByLayerId(R.id.underline));
+        bgShape.setStroke(convertDpToPx(2), ContextCompat.getColor(context, underlineColor));
+        shape.setDrawable(0, bgShape);
+        view.setBackground(shape);
         pin1 = findViewById(R.id.pin1);
         pin2 = findViewById(R.id.pin2);
         pin3 = findViewById(R.id.pin3);
@@ -154,9 +174,26 @@ public class EditTextPin extends ConstraintLayout {
             }
         });
     }
-    public String getPin(){
-        String pin;
-        pin = ""+pin1.getText() + pin2.getText() + pin3.getText() + pin4.getText() + pin5.getText() + pin6.getText();
-        return pin;
+
+
+    private void handleAttrs(AttributeSet attrs) {
+        TypedArray style = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.EditTextPin, 0, 0);
+        try {
+            underlineColor = style.getResourceId(R.styleable.EditTextPin_underlineColor, R.color.underlineColor);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            style.recycle();
+        }
+        updateStyling();
+    }
+
+    private void updateStyling() {
+
+
+    }
+    private int convertDpToPx(int dp){
+        return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
     }
 }
