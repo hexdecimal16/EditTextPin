@@ -22,8 +22,7 @@ public class EditTextPin extends ConstraintLayout {
     private EditText pin1, pin2, pin3, pin4, pin5, pin6;
     private Context context;
     private int underlineColor = R.color.underlineColor;
-    private LinearLayout layout;
-    private ConstraintLayout viewBackground;
+    private int background = R.drawable.background;
     public EditTextPin(Context context, AttributeSet attrs) {
         super(context, attrs);
         handleAttrs(attrs);
@@ -52,6 +51,10 @@ public class EditTextPin extends ConstraintLayout {
         pin4 = findViewById(R.id.pin4);
         pin5 = findViewById(R.id.pin5);
         pin6 = findViewById(R.id.pin6);
+
+        Drawable drawable = ContextCompat.getDrawable(context, background);
+        setTextBackground(drawable);
+
         //Add TextWatchers to get focus
         pin1.addTextChangedListener(new TextWatcher() {
             @Override
@@ -180,20 +183,24 @@ public class EditTextPin extends ConstraintLayout {
         TypedArray style = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.EditTextPin, 0, 0);
         try {
             underlineColor = style.getResourceId(R.styleable.EditTextPin_underlineColor, R.color.underlineColor);
+            background = style.getResourceId(R.styleable.EditTextPin_textBackground, R.drawable.background);
         } catch (Exception e) {
             e.printStackTrace();
         }
         finally {
             style.recycle();
         }
-        updateStyling();
     }
 
-    private void updateStyling() {
-
-
-    }
     private int convertDpToPx(int dp){
         return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
+    }
+    private void setTextBackground(Drawable drawable) {
+        pin1.setBackground(drawable);
+        pin2.setBackground(drawable);
+        pin3.setBackground(drawable);
+        pin4.setBackground(drawable);
+        pin5.setBackground(drawable);
+        pin6.setBackground(drawable);
     }
 }

@@ -10,10 +10,12 @@
     tools:context=".MainActivity">
 
     <com.dhairytripathi.library.EditTextPin
+        android:id="@+id/pin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:textBackground="@drawable/test"
         app:layout_constraintTop_toTopOf="parent"
         app:underlineColor="@android:color/holo_blue_light"/>
     <com.dhairytripathi.library.EditTextPin

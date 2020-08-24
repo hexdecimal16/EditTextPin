@@ -3,5 +3,6 @@
     <declare-styleable name="EditTextPin">
         <!-- Styleable colors -->
         <attr name="underlineColor" format="reference"/>
+        <attr name="textBackground" format="reference"/>
     </declare-styleable>
 </resources>
