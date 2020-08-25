@@ -11,6 +11,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -64,13 +65,20 @@ public class EditTextPin extends ConstraintLayout {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                if(s.length() > 1) {
+                    pin1.setSelection(1);
+                    pin2.requestFocus();
+                }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (pin1.getText().toString().length() == 1) {
+                if (s.length() == 1) {
+                    Log.i("TEST", "String : " + s.toString());
                     pin2.requestFocus();
+                } else if(s.length() > 1){
+                    pin1.setText(String.valueOf(s.charAt(0)));
+                    pin2.setText(s.subSequence(1, s.length()));
                 }
             }
         });
@@ -83,15 +91,22 @@ public class EditTextPin extends ConstraintLayout {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (pin2.getText().toString().length() == 0) {
+                if (s.length() == 0) {
+                    pin1.setSelection(1);
                     pin1.requestFocus();
+                } else {
+                    pin2.setSelection(1);
+                    pin3.requestFocus();
                 }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (pin2.getText().toString().length() == 1) {
+                if (s.length() == 1) {
                     pin3.requestFocus();
+                } else if(s.length() > 1){
+                    pin2.setText(String.valueOf(s.charAt(0)));
+                    pin3.setText(s.subSequence(1, s.length()));
                 }
             }
         });
@@ -104,15 +119,21 @@ public class EditTextPin extends ConstraintLayout {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (pin3.getText().toString().length() == 0) {
+                if (s.length() == 0) {
                     pin2.requestFocus();
+                } else {
+                    pin3.setSelection(1);
+                    pin4.requestFocus();
                 }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (pin3.getText().toString().length() == 1) {
+                if (s.length() == 1) {
                     pin4.requestFocus();
+                } else if(s.length() > 1){
+                    pin3.setText(String.valueOf(s.charAt(0)));
+                    pin4.setText(s.subSequence(1, s.length()));
                 }
             }
         });
@@ -125,15 +146,21 @@ public class EditTextPin extends ConstraintLayout {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (pin4.getText().toString().length() == 0) {
+                if (s.length() == 0) {
                     pin3.requestFocus();
+                } else {
+                    pin4.setSelection(1);
+                    pin5.requestFocus();
                 }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (pin4.getText().toString().length() == 1) {
+                if (s.length() == 1) {
                     pin5.requestFocus();
+                } else if(s.length() > 1){
+                    pin4.setText(String.valueOf(s.charAt(0)));
+                    pin5.setText(s.subSequence(1, s.length()));
                 }
             }
         });
@@ -146,15 +173,21 @@ public class EditTextPin extends ConstraintLayout {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (pin5.getText().toString().length() == 0) {
+                if (s.toString().length() == 0) {
                     pin4.requestFocus();
+                } else {
+                    pin5.setSelection(1);
+                    pin6.requestFocus();
                 }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (pin5.getText().toString().length() == 1) {
+                if (s.length() == 1) {
                     pin6.requestFocus();
+                } else if(s.length() > 1){
+                    pin5.setText(String.valueOf(s.charAt(0)));
+                    pin6.setText(s.subSequence(1, s.length()));
                 }
             }
         });
@@ -167,8 +200,10 @@ public class EditTextPin extends ConstraintLayout {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (pin6.getText().toString().length() == 0) {
+                if (s.length() == 0) {
                     pin5.requestFocus();
+                } else {
+                    pin6.setSelection(1);
                 }
             }
 
