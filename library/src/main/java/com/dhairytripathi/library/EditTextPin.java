@@ -8,6 +8,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
+import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
@@ -24,6 +25,8 @@ public class EditTextPin extends ConstraintLayout {
     private Context context;
     private int underlineColor = R.color.underlineColor;
     private int background = R.drawable.background;
+    private static final String TAG = "EditTextPin";
+
     public EditTextPin(Context context, AttributeSet attrs) {
         super(context, attrs);
         handleAttrs(attrs);
@@ -44,7 +47,9 @@ public class EditTextPin extends ConstraintLayout {
         LayerDrawable shape = (LayerDrawable) ContextCompat.getDrawable(context,R.drawable.underline);
         GradientDrawable bgShape = (GradientDrawable) (shape.findDrawableByLayerId(R.id.underline));
         bgShape.setStroke(convertDpToPx(2), ContextCompat.getColor(context, underlineColor));
-        shape.setDrawable(0, bgShape);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            shape.setDrawable(0, bgShape);
+        }
         view.setBackground(shape);
         pin1 = findViewById(R.id.pin1);
         pin2 = findViewById(R.id.pin2);
