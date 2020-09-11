@@ -231,6 +231,11 @@ public class EditTextPin extends ConstraintLayout {
             style.recycle();
         }
     }
+    public String getPin() {
+        String pin;
+        pin = "" + pin1.getText() + pin2.getText() + pin3.getText() + pin4.getText() + pin5.getText() + pin6.getText();
+        return pin;
+    }
 
     private int convertDpToPx(int dp){
         return (int) (dp * Resources.getSystem().getDisplayMetrics().density);

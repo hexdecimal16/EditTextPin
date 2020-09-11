@@ -58,6 +58,6 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 
 ```XML
 app:underlineColor="" <!-- To change underline color-->
-app:textBackground="" <!-- Add a drawable to Edit Text background-->
+app:textBackground="" <!-- Add a drawable to Edit Text background (For api 23+) -->
 ```
 
